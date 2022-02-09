@@ -1,23 +1,23 @@
 package model;
 
-import java.util.Date;
-
 public class User {
     private int id;
     private String name;
-    private Date dob;
+    private String password;
     private String phoneNumber;
     private String mail;
+    private String address;
 
     public User() {
     }
 
-    public User(int id, String name, Date dob, String phoneNumber, String mail) {
+    public User(int id, String name, String password, String phoneNumber, String mail, String address) {
         this.id = id;
         this.name = name;
-        this.dob = dob;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.mail = mail;
+        this.address = address;
     }
 
     public int getId() {
@@ -36,12 +36,12 @@ public class User {
         this.name = name;
     }
 
-    public Date getDob() {
-        return dob;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhoneNumber() {
@@ -58,5 +58,13 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
