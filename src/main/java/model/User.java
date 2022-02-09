@@ -1,16 +1,18 @@
 package model;
 
+import java.util.Date;
+
 public class User {
     private int id;
     private String name;
-    private String dob;
+    private Date dob;
     private String phoneNumber;
     private String mail;
 
     public User() {
     }
 
-    public User(int id, String name, String dob, String phoneNumber, String mail) {
+    public User(int id, String name, Date dob, String phoneNumber, String mail) {
         this.id = id;
         this.name = name;
         this.dob = dob;
@@ -34,11 +36,11 @@ public class User {
         this.name = name;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 
