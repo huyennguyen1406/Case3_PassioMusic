@@ -12,7 +12,6 @@
     <title>Title</title>
 </head>
 
-<link rel="stylesheet" href="test1.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -33,49 +32,48 @@
                         <h3 class="mb-0">User Information</h3>
                     </div>
                     <div class="card-body">
-                        <form class="form" role="form" autocomplete="off">
+                        <form action="/home?action=loginPost" class="form" role="form" autocomplete="off">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" value="jane">
+                                    <input class="form-control" name="userName" type="text" value="${userName}">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Password</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="password" value="11111122333">
+                                    <input class="form-control" name="password" type="password" value="${password}">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Full name</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="text" require="" value="Jane">
-                                </div>
-                            </div>
+<%--                            <div class="form-group row">--%>
+<%--                                <label class="col-lg-3 col-form-label form-control-label">Full name</label>--%>
+<%--                                <div class="col-lg-9">--%>
+<%--                                    <input class="form-control" name="name" type="text" require="" value="Jane">--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" require="" value="">
+                                    <input class="form-control" name="phoneNumber" type="text" require="" value="0123456789">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="email" require="" value="email@gmail.com">
+                                    <input class="form-control" name="email" type="email" require="" value="email@gmail.com">
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Address</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="url" value="VietNam">
+                                    <input class="form-control" name="address" type="text" value="VietNam">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                 <div class="col-lg-9">
                                     <input type="reset" class="btn btn-secondary" value="Cancel">
-                                    <input type="button" class="btn btn-primary" value="Save Changes">
+                                    <input type="submit" class="btn btn-primary" value="Save Changes">
                                 </div>
                             </div>
                         </form>

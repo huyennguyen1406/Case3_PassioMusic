@@ -26,6 +26,14 @@ public class ControlServlet extends HttpServlet {
             action = "";
         }
         switch (action){
+            case "checkLogin":
+
+            case "loginPost":
+                loginPost(request,response);
+                break;
+            case "registerPost":
+                registerPost(request,response);
+                break;
             case "updateInfo":
                 updateInfo(request,response);
                 break;
@@ -33,6 +41,20 @@ public class ControlServlet extends HttpServlet {
                 display(request,response);
                 break;
         }
+    }
+
+    private void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            // Lấy thông tin, lưu vào trong database
+        response.sendRedirect("/login-or-register/login-or-register.jsp");
+    }
+
+    private void registerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        request.setAttribute("userName",userName);
+        request.setAttribute("password",password);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/update-information/update-information.jsp");
+        requestDispatcher.forward(request,response);
     }
 
     private void updateInfo(HttpServletRequest request, HttpServletResponse response) {
