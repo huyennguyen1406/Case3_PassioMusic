@@ -44,4 +44,13 @@ public class CartService {
         carts.clear();
         return sum;
     }
+
+    public void addSong(Song song) {
+    }
+
+    public void deleteSongById(int id) {
+    }
+
+    public void deleteSingerById(int id) {
+    }
 }

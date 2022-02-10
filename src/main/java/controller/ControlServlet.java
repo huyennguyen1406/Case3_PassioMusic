@@ -45,14 +45,14 @@ public class ControlServlet extends HttpServlet {
                 displayAllOfCart(request, response);
                 break;
             case "pay":
-                payMoney(request, response);
+                payment(request, response);
                 break;
             default:
                 displayAllOfSong(request, response);
         }
     }
 
-    private void payMoney(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void payment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         double money = cartService.payMoney();
         request.setAttribute("money", money);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("cart.jsp");
@@ -94,4 +94,33 @@ public class ControlServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+    private void createUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<Cart> carts = cartService.getCarts();
+        request.setAttribute("user", createUser());
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("cart.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private Object createUser() {
+        return null;
+    }
+
+    private void addSongBySinger (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Song song = songService.getSong();
+        cartService.addSong(song);
+        displayAllOfSong(request, response);
+    }
+
+    private void deleteSong(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        cartService.deleteSongById(id);
+        displayAllOfSong(request, response);
+    }
+
+    private void deleteSinger(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        cartService.deleteSingerById(id);
+        displayAllOfSong(request, response);
+    }
 }
