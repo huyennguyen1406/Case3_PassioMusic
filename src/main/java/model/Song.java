@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class Songs {
+public class Song {
     private int id;
     private String nameSong;
     private String singerName;

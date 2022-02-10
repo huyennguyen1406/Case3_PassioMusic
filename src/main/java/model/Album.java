@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class Album {
     private int id;
     private String albumName;
+    private String songName;
     private String image;
     private String description;
 
@@ -19,6 +20,7 @@ public class Album {
         return "Album{" +
                 "id=" + id +
                 ", albumName='" + albumName + '\'' +
+                ", albumName='" + songName + '\'' +
                 ", image='" + image + '\'' +
                 ", description='" + description + '\'' +
                 '}';
