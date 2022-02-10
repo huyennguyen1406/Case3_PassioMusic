@@ -1,0 +1,28 @@
+package model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
+public class Cart {
+    private int id;
+    private Song song;
+    private int idUser;
+
+    public Cart(Song song) {
+    }
+
+    public Song getSong() {
+        return song;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "song=" + song +
+                '}';
+    }
+}

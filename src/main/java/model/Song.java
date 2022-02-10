@@ -14,7 +14,7 @@ public class Song {
     private String singerName;
     private String link;
     private String image;
-    private String description;
+    private double price;
 
     @Override
     public String toString() {
@@ -24,7 +24,7 @@ public class Song {
                 ", singerName='" + singerName + '\'' +
                 ", link='" + link + '\'' +
                 ", image='" + image + '\'' +
-                ", description='" + description + '\'' +
+                ", price='" + price + '\'' +
                 '}';
     }
 }
