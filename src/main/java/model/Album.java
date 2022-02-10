@@ -4,25 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 
-public class Songs {
+public class Album {
     private int id;
-    private String nameSong;
-    private String singerName;
-    private String link;
+    private String albumName;
     private String image;
     private String description;
 
     @Override
     public String toString() {
-        return "Songs{" +
+        return "Album{" +
                 "id=" + id +
-                ", nameSong='" + nameSong + '\'' +
-                ", singerName='" + singerName + '\'' +
-                ", link='" + link + '\'' +
+                ", albumName='" + albumName + '\'' +
                 ", image='" + image + '\'' +
                 ", description='" + description + '\'' +
                 '}';
