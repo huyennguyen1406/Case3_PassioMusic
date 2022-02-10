@@ -1,6 +1,7 @@
 package control;
 
 import DAO.AdminDAO;
+import model.Admin;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -10,6 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "ControlServlet", value = "/home")
 public class ControlServlet extends HttpServlet {
     AdminDAO adminDAO = new AdminDAO();
+    Admin admin = new Admin();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         action(request,response);

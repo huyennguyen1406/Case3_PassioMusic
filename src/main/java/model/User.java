@@ -1,9 +1,7 @@
 package model;
 
-public class User {
-    private int id;
-    private String name;
-    private String password;
+public class User extends Account {
+    private String nameUser;
     private String phoneNumber;
     private String email;
     private String address;
@@ -11,45 +9,28 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String password, String phoneNumber, String email, String address) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
+    public User(int id, String userName, String password, int idRole, String nameUser, String phoneNumber, String email, String address) {
+        super(id, userName, password, idRole);
+        this.nameUser = nameUser;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
     }
 
-    public User(String name, String password, String phoneNumber, String email, String address) {
-        this.name = name;
-        this.password = password;
+    public User(String userName, String password, int idRole, String nameUser, String phoneNumber, String email, String address) {
+        super(userName, password, idRole);
+        this.nameUser = nameUser;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
     }
 
-    public int getId() {
-        return id;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
     public String getPhoneNumber() {

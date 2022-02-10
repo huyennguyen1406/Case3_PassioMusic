@@ -1,8 +1,7 @@
 package model;
 
-public class Singer {
-    private Integer id;
-    private String name;
+public class Singer extends Account {
+    private String nameSinger;
     private Long phoneNumber;
     private String email;
     private String address;
@@ -10,35 +9,28 @@ public class Singer {
     public Singer() {
     }
 
-    public Singer(Integer id, String name, Long phoneNumber, String email, String address) {
-        this.id = id;
-        this.name = name;
+    public Singer(String userName, String password, int idRole, String nameSinger, Long phoneNumber, String email, String address) {
+        super(userName, password, idRole);
+        this.nameSinger = nameSinger;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
     }
 
-    public Singer(String name, Long phoneNumber, String email, String address) {
-        this.name = name;
+    public Singer(int id, String userName, String password, int idRole, String nameSinger, Long phoneNumber, String email, String address) {
+        super(id, userName, password, idRole);
+        this.nameSinger = nameSinger;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
     }
 
-    public Integer getId() {
-        return id;
+    public String getNameSinger() {
+        return nameSinger;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNameSinger(String nameSinger) {
+        this.nameSinger = nameSinger;
     }
 
     public Long getPhoneNumber() {
