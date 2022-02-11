@@ -48,15 +48,29 @@ public class ControlServlet extends HttpServlet {
                 updateInfo(request, response);
                 break;
             case "delete":
-                delete(request,response);
+                delete(request, response);
+                break;
+            case "getProfileSinger":
+                getProfileSinger(request, response);
+                break;
+            case "getInfoAccount":
+                getInfoAccount(request, response);
+                break;
             default:
                 display(request, response);
                 break;
         }
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void getProfileSinger(HttpServletRequest request, HttpServletResponse response) {
 
+    }
+
+    private void getInfoAccount(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int totalSinger = accountDAO.getTotalSinger();
         int totalUser = accountDAO.getTotalUser();
         int idAdmin = Integer.parseInt(request.getParameter("idAdmin"));
@@ -81,9 +95,9 @@ public class ControlServlet extends HttpServlet {
         String password = request.getParameter("password");
         int idRole = accountDAO.getAccountRole(userName, password);
         int idLogin = accountDAO.getAccountId(userName, password);
-        int idAdmin = accountDAO.getAccountId(userName,password);
+        int idAdmin = accountDAO.getAccountId(userName, password);
         if (idRole == 1) {
-            Admin admin = new Admin(idAdmin,userName, password, idRole);
+            Admin admin = new Admin(idAdmin, userName, password, idRole);
             int totalSinger = accountDAO.getTotalSinger();
             int totalUser = accountDAO.getTotalUser();
             double revenue = billDAO.getTotalRevenue();
@@ -100,13 +114,16 @@ public class ControlServlet extends HttpServlet {
         } else if (idRole == 2) {
             Singer singer = singerDAO.getSinger(idLogin);
             request.setAttribute("singer", singer);
+            request.setAttribute("userName", userName);
+            request.setAttribute("password", password);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/dashboard.jsp");
             requestDispatcher.forward(request, response);
         } else if (idRole == 3) {
-            User user = userDAO.getUser(idLogin);
-            request.setAttribute("user", user);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/home-users.jsp");
-            requestDispatcher.forward(request, response);
+            response.sendRedirect("https://zingmp3.vn/");
+//            User user = userDAO.getUser(idLogin);
+//            request.setAttribute("user", user);
+//            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/home-users.jsp");
+//            requestDispatcher.forward(request, response);
         }
     }
 
@@ -114,23 +131,23 @@ public class ControlServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
 //        if (!accountDAO.checkAccount(userName, password)) {
-            int role = Integer.parseInt(request.getParameter("role"));
-            String fullName = request.getParameter("fullName");
-            String phoneNumber = request.getParameter("phoneNumber");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            Account account = new Account(userName, password, role);
-            accountDAO.addAccount(account);
-            int id = accountDAO.getAccountId(userName, password);
-            switch (role) {
-                case 2:
-                    singerDAO.addSinger(id, fullName, phoneNumber, email, address);
-                    break;
-                case 3:
-                    userDAO.addUser(id, fullName, phoneNumber, email, address);
-                    break;
-            }
-            response.sendRedirect("/login-or-register/login-or-register.jsp");
+        int role = Integer.parseInt(request.getParameter("role"));
+        String fullName = request.getParameter("fullName");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        Account account = new Account(userName, password, role);
+        accountDAO.addAccount(account);
+        int id = accountDAO.getAccountId(userName, password);
+        switch (role) {
+            case 2:
+                singerDAO.addSinger(id, fullName, phoneNumber, email, address);
+                break;
+            case 3:
+                userDAO.addUser(id, fullName, phoneNumber, email, address);
+                break;
+        }
+        response.sendRedirect("/login-or-register/login-or-register.jsp");
 //        }
 
     }

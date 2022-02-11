@@ -9,15 +9,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 <head>
-    <title>Admin Management</title>
+    <title>Singer Management</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/"/>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="/admins/plugins/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/singers/plugins/images/favicon.png">
 
-    <link href="/admins/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/admins/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <link href="/singers/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/singers/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
 
-    <link href="/admins/css/style.min.css" rel="stylesheet">
+    <link href="/singers/css/style.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="preloader">
@@ -34,15 +34,15 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-dark">
             <div class="navbar-header" data-logobg="skin6">
 
-                <a class="navbar-brand" href="/home?action=checkLoginAndRole&userName=${admin.getUserName()}&password=${admin.getPassword()}">
+                <a class="navbar-brand" href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}">
 
                     <b class="logo-icon">
 
-                        <img src="/admins/plugins/images/logo-icon.png" alt="homepage"/>
+                        <img src="/singers/plugins/images/logo-icon.png" alt="homepage"/>
                     </b>
 
                     <span class="logo-text">
-                            <img src="/admins/plugins/images/logo-text.png" alt="homepage"/>
+                            <img src="/singers/plugins/images/logo-text.png" alt="homepage"/>
                         </span>
                 </a>
 
@@ -56,9 +56,9 @@
 
                     <li>
                         <a class="profile-pic" href="/home">
-                            <img src="/admins/plugins/images/users/varun.jpg" alt="user-img" width="36"
+                            <img src="/singers/plugins/images/users/varun.jpg" alt="user-img" width="36"
                                  class="img-circle"><span
-                                class="text-white font-medium">${admin.getUserName()}</span></a>
+                                class="text-white font-medium">${singer.getNameSinger()}</span></a>
                     </li>
 
                 </ul>
@@ -74,21 +74,21 @@
                 <ul id="sidebarnav">
 
                     <li class="sidebar-item pt-2">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=checkLoginAndRole&userName=${admin.getUserName()}&password=${admin.getPassword()}"
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}"
                            aria-expanded="false">
                             <i class="far fa-clock" aria-hidden="true"></i>
-                            <span class="hide-menu">Dashboard</span>
+                            <span class="hide-menu">Analyst</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=getProfileSinger&idSinger=${singer.getId()}";
+                           aria-expanded="false">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="hide-menu">Profile</span>
                         </a>
                     </li>
 <%--                    <li class="sidebar-item">--%>
-<%--                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admins/profile.jsp"--%>
-<%--                           aria-expanded="false">--%>
-<%--                            <i class="fa fa-user" aria-hidden="true"></i>--%>
-<%--                            <span class="hide-menu">Profile</span>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
-<%--                    <li class="sidebar-item">--%>
-<%--                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admins/basic-table.jsp"--%>
+<%--                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=getProfileSinger&idSinger=${singer.getId()}"--%>
 <%--                           aria-expanded="false">--%>
 <%--                            <i class="fa fa-table" aria-hidden="true"></i>--%>
 <%--                            <span class="hide-menu">Basic Table</span>--%>
@@ -105,7 +105,7 @@
         <div class="page-breadcrumb bg-white">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Dashboard</h4>
+                    <h4 class="page-title">Analyst Dashboard</h4>
                 </div>
             </div>
         </div>
@@ -231,15 +231,15 @@
         </div>
     </div>
 </div>
-<script src="/admins/plugins/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/admins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/admins/js/app-style-switcher.js"></script>
-<script src="/admins/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-<script src="/admins/js/waves.js"></script>
-<script src="/admins/js/sidebarmenu.js"></script>
-<script src="/admins/js/custom.js"></script>
-<script src="/admins/plugins/bower_components/chartist/dist/chartist.min.js"></script>
-<script src="/admins/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-<script src="/admins/js/pages/dashboards/dashboard1.js"></script>
+<script src="/singers/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/singers/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/singers/js/app-style-switcher.js"></script>
+<script src="/singers/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+<script src="/singers/js/waves.js"></script>
+<script src="/singers/js/sidebarmenu.js"></script>
+<script src="/singers/js/custom.js"></script>
+<script src="/singers/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+<script src="/singers/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+<script src="/singers/js/pages/dashboards/dashboard1.js"></script>
 </body>
 </html>

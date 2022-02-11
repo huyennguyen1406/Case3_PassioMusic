@@ -87,13 +87,13 @@
 <%--                            <span class="hide-menu">Profile</span>--%>
 <%--                        </a>--%>
 <%--                    </li>--%>
-<%--                    <li class="sidebar-item">--%>
-<%--                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admins/basic-table.jsp"--%>
-<%--                           aria-expanded="false">--%>
-<%--                            <i class="fa fa-table" aria-hidden="true"></i>--%>
-<%--                            <span class="hide-menu">Basic Table</span>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/homes?action=getInfoAccount&idAdmin=${admin.getId()}";
+                           aria-expanded="false">
+                            <i class="fa fa-table" aria-hidden="true"></i>
+                            <span class="hide-menu">Basic Table</span>
+                        </a>
+                    </li>
                 </ul>
 
             </nav>
