@@ -2,8 +2,10 @@ package controller;
 
 import model.Cart;
 import model.Song;
+import model.User;
 import service.CartService;
 import service.SongService;
+import service.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 public class ControlServlet extends HttpServlet {
     private final SongService songService = new SongService();
     private final CartService cartService = new CartService();
+    private final UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         action(request, response);
@@ -44,6 +47,18 @@ public class ControlServlet extends HttpServlet {
             case "cart":
                 displayAllOfCart(request, response);
                 break;
+            case "addSongBySinger":
+                addSongBySinger(request, response);
+                break;
+            case "createUser":
+                createUser(request, response);
+                break;
+            case "deleteSong":
+                deleteSong(request, response);
+                break;
+            case "deleteSinger":
+                deleteSinger(request, response);
+                break;
             case "pay":
                 payment(request, response);
                 break;
@@ -53,7 +68,7 @@ public class ControlServlet extends HttpServlet {
     }
 
     private void payment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        double money = cartService.payMoney();
+        double money = cartService.payment();
         request.setAttribute("money", money);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("cart.jsp");
         requestDispatcher.forward(request, response);
@@ -95,7 +110,7 @@ public class ControlServlet extends HttpServlet {
     }
 
     private void createUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Cart> carts = cartService.getCarts();
+        ArrayList<User> users = userService.getUsers();
         request.setAttribute("user", createUser());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("cart.jsp");
         requestDispatcher.forward(request, response);

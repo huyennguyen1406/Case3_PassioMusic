@@ -1,15 +1,21 @@
 package service;
 
 import model.Cart;
+import model.Singer;
 import model.Song;
 
 import java.util.ArrayList;
 
 public class CartService {
     private final static ArrayList<Cart> carts = new ArrayList<>();
+    private final static ArrayList<Singer> singers = new ArrayList<>();
 
     public ArrayList<Cart> getCarts() {
         return carts;
+    }
+
+    public ArrayList<Singer> getSingers() {
+        return singers;
     }
 
     public void addSongToCart(Song song) {
@@ -17,7 +23,6 @@ public class CartService {
         for (Cart cart : carts) {
             if (cart.getSong().getId() == song.getId());
         }
-
         if (!check) {
             Cart cart = new Cart(song);
             carts.add(cart);
@@ -36,7 +41,7 @@ public class CartService {
         }
     }
 
-    public Double payMoney() {
+    public Double payment() {
         double sum = 0;
         for (Cart cart : carts) {
             sum += cart.getSong().getPrice();
@@ -52,5 +57,14 @@ public class CartService {
     }
 
     public void deleteSingerById(int id) {
+        Singer singerDel = null;
+        for (Singer singer : singers) {
+            if (singer.getId() == id) {
+                singerDel = singer;
+            }
+        }
+        if (singerDel != null) {
+            singers.remove(singerDel);
+        }
     }
 }
