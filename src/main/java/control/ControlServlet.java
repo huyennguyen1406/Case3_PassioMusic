@@ -47,10 +47,33 @@ public class ControlServlet extends HttpServlet {
             case "updateInfo":
                 updateInfo(request, response);
                 break;
+            case "delete":
+                delete(request,response);
             default:
                 display(request, response);
                 break;
         }
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        int totalSinger = accountDAO.getTotalSinger();
+        int totalUser = accountDAO.getTotalUser();
+        int idAdmin = Integer.parseInt(request.getParameter("idAdmin"));
+        int idSinger = Integer.parseInt(request.getParameter("idSinger"));
+        Admin admin = adminDAO.getAdminById(idAdmin);
+        accountDAO.deleteSingerById(idSinger);
+        double revenue = billDAO.getTotalRevenue();
+        ArrayList<SingerByRevenue> singerByRevenue = billDAO.getSingerListByRevenue();
+        ArrayList<UserByRevenue> userByRevenue = billDAO.getUserListByRevenue();
+        request.setAttribute("admin", admin);
+        request.setAttribute("totalSinger", totalSinger);
+        request.setAttribute("totalUser", totalUser);
+        request.setAttribute("revenue", revenue);
+        request.setAttribute("singerByRevenue", singerByRevenue);
+        request.setAttribute("userByRevenue", userByRevenue);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admins/dashboard.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void checkLoginAndRole(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,23 +81,26 @@ public class ControlServlet extends HttpServlet {
         String password = request.getParameter("password");
         int idRole = accountDAO.getAccountRole(userName, password);
         int idLogin = accountDAO.getAccountId(userName, password);
+        int idAdmin = accountDAO.getAccountId(userName,password);
         if (idRole == 1) {
-            Admin admin = new Admin(userName, password, idRole);
+            Admin admin = new Admin(idAdmin,userName, password, idRole);
             int totalSinger = accountDAO.getTotalSinger();
             int totalUser = accountDAO.getTotalUser();
             double revenue = billDAO.getTotalRevenue();
             ArrayList<SingerByRevenue> singerByRevenue = billDAO.getSingerListByRevenue();
+            ArrayList<UserByRevenue> userByRevenue = billDAO.getUserListByRevenue();
             request.setAttribute("admin", admin);
             request.setAttribute("totalSinger", totalSinger);
             request.setAttribute("totalUser", totalUser);
             request.setAttribute("revenue", revenue);
             request.setAttribute("singerByRevenue", singerByRevenue);
+            request.setAttribute("userByRevenue", userByRevenue);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admins/dashboard.jsp");
             requestDispatcher.forward(request, response);
         } else if (idRole == 2) {
             Singer singer = singerDAO.getSinger(idLogin);
             request.setAttribute("singer", singer);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/home-singers.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/dashboard.jsp");
             requestDispatcher.forward(request, response);
         } else if (idRole == 3) {
             User user = userDAO.getUser(idLogin);
@@ -87,7 +113,7 @@ public class ControlServlet extends HttpServlet {
     private void loginPost(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, ServletException, IOException {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        if (accountDAO.checkAccount(userName, password)) {
+//        if (!accountDAO.checkAccount(userName, password)) {
             int role = Integer.parseInt(request.getParameter("role"));
             String fullName = request.getParameter("fullName");
             String phoneNumber = request.getParameter("phoneNumber");
@@ -102,13 +128,10 @@ public class ControlServlet extends HttpServlet {
                     break;
                 case 3:
                     userDAO.addUser(id, fullName, phoneNumber, email, address);
-                    out.println();
                     break;
             }
             response.sendRedirect("/login-or-register/login-or-register.jsp");
-        } else {
-
-        }
+//        }
 
     }
 

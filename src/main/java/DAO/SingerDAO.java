@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class SingerDAO {
     MyConnection myConnection = new MyConnection();
 
-    private static final String INSERT_ACCOUNT = "insert into tbl_singer (id_sing,sing_name,sing_phoneNumber,sing_email,sing_address) values (?, ?, ?, ?, ?);";
+    private static final String INSERT_SINGER = "insert into tbl_singer (id_sing,sing_name,sing_phoneNumber,sing_email,sing_address) values (?, ?, ?, ?, ?);";
     private static final String SELECT_SINGER_BY_ID = "select * from tbl_singer where id_user = ?;";
 
 
@@ -20,7 +20,7 @@ public class SingerDAO {
     public void addSinger(int id, String fullName, String phoneNumber, String email, String address) {
         try {
             Connection connection = myConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ACCOUNT);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SINGER);
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, fullName);
             preparedStatement.setString(3, phoneNumber);

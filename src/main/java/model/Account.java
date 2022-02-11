@@ -9,7 +9,9 @@ public class Account {
     public Account() {
     }
 
-
+    public Account(int id) {
+        this.id = id;
+    }
 
     public Account(int id, String userName, String password, int idRole) {
         this.id = id;
