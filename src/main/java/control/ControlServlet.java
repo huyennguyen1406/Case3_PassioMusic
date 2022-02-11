@@ -87,25 +87,30 @@ public class ControlServlet extends HttpServlet {
     private void loginPost(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, ServletException, IOException {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        int role = Integer.parseInt(request.getParameter("role"));
-        String fullName = request.getParameter("fullName");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String email = request.getParameter("email");
-        String address = request.getParameter("address");
-        Account account = new Account(userName, password, role);
-        accountDAO.addAccount(account);
+        if(accountDAO.checkAccount(userName,password)){
+            int role = Integer.parseInt(request.getParameter("role"));
+            String fullName = request.getParameter("fullName");
+            String phoneNumber = request.getParameter("phoneNumber");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            Account account = new Account(userName, password, role);
+            accountDAO.addAccount(account);
 
-        int id = accountDAO.getAccountId(userName, password);
-        switch (role) {
-            case 2:
-                singerDAO.addSinger(id, fullName, phoneNumber, email, address);
-                break;
-            case 3:
-                userDAO.addUser(id, fullName, phoneNumber, email, address);
-                out.println();
-                break;
+            int id = accountDAO.getAccountId(userName, password);
+            switch (role) {
+                case 2:
+                    singerDAO.addSinger(id, fullName, phoneNumber, email, address);
+                    break;
+                case 3:
+                    userDAO.addUser(id, fullName, phoneNumber, email, address);
+                    out.println();
+                    break;
+            }
+            response.sendRedirect("/login-or-register/login-or-register.jsp");
+        } else {
+
         }
-        response.sendRedirect("/login-or-register/login-or-register.jsp");
+
     }
 
     private void registerPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
