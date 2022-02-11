@@ -1,15 +1,13 @@
 package control;
 
 import DAO.*;
-import model.Account;
-import model.Admin;
-import model.Singer;
-import model.User;
+import model.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static java.lang.System.out;
 
@@ -65,10 +63,12 @@ public class ControlServlet extends HttpServlet {
             int totalSinger = accountDAO.getTotalSinger();
             int totalUser = accountDAO.getTotalUser();
             double revenue = billDAO.getTotalRevenue();
+            ArrayList<SingerByRevenue> singerByRevenue = billDAO.getSingerListByRevenue();
             request.setAttribute("admin", admin);
             request.setAttribute("totalSinger", totalSinger);
             request.setAttribute("totalUser", totalUser);
             request.setAttribute("revenue", revenue);
+            request.setAttribute("singerByRevenue", singerByRevenue);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admins/dashboard.jsp");
             requestDispatcher.forward(request, response);
         } else if (idRole == 2) {
@@ -87,7 +87,7 @@ public class ControlServlet extends HttpServlet {
     private void loginPost(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, ServletException, IOException {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        if(accountDAO.checkAccount(userName,password)){
+        if (accountDAO.checkAccount(userName, password)) {
             int role = Integer.parseInt(request.getParameter("role"));
             String fullName = request.getParameter("fullName");
             String phoneNumber = request.getParameter("phoneNumber");
@@ -95,7 +95,6 @@ public class ControlServlet extends HttpServlet {
             String address = request.getParameter("address");
             Account account = new Account(userName, password, role);
             accountDAO.addAccount(account);
-
             int id = accountDAO.getAccountId(userName, password);
             switch (role) {
                 case 2:
