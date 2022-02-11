@@ -26,13 +26,13 @@
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <span class="anchor" id="formUserEdit"></span>
-                <!-- form user info -->
+
                 <div class="card card-outline-secondary">
                     <div class="card-header">
                         <h3 class="mb-0">User Information</h3>
                     </div>
                     <div class="card-body">
-                        <form action="/home?action=loginPost" class="form" role="form" autocomplete="off">
+                        <form action="/home?action=loginPost" method="post" class="form" role="form" autocomplete="off">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                 <div class="col-lg-9">
@@ -43,6 +43,12 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Password</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" name="password" type="password" value="${password}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Full name</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" name="fullName" type="text" value="Hào Dajk">
                                 </div>
                             </div>
 <%--                            <div class="form-group row">--%>
@@ -67,6 +73,12 @@
                                 <label class="col-lg-3 col-form-label form-control-label">Address</label>
                                 <div class="col-lg-9">
                                     <input class="form-control" name="address" type="text" value="VietNam">
+                                </div>
+                            </div>
+                            <div class="form-group row" hidden>
+                                <label class="col-lg-3 col-form-label form-control-label">Role</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" name="role" type="text" value="${role}">
                                 </div>
                             </div>
                             <div class="form-group row">

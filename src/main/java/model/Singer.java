@@ -2,14 +2,21 @@ package model;
 
 public class Singer extends Account {
     private String nameSinger;
-    private Long phoneNumber;
+    private String phoneNumber;
     private String email;
     private String address;
 
     public Singer() {
     }
 
-    public Singer(String userName, String password, int idRole, String nameSinger, Long phoneNumber, String email, String address) {
+    public Singer(String nameSinger, String phoneNumber, String email, String address) {
+        this.nameSinger = nameSinger;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
+
+    public Singer(String userName, String password, int idRole, String nameSinger, String phoneNumber, String email, String address) {
         super(userName, password, idRole);
         this.nameSinger = nameSinger;
         this.phoneNumber = phoneNumber;
@@ -17,7 +24,7 @@ public class Singer extends Account {
         this.address = address;
     }
 
-    public Singer(int id, String userName, String password, int idRole, String nameSinger, Long phoneNumber, String email, String address) {
+    public Singer(int id, String userName, String password, int idRole, String nameSinger, String phoneNumber, String email, String address) {
         super(id, userName, password, idRole);
         this.nameSinger = nameSinger;
         this.phoneNumber = phoneNumber;
@@ -33,11 +40,11 @@ public class Singer extends Account {
         this.nameSinger = nameSinger;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
