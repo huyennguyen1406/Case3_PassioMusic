@@ -11,6 +11,12 @@ public class Song {
     public Song() {
     }
 
+    public Song(int id, String nameSong, double price) {
+        this.id = id;
+        this.nameSong = nameSong;
+        this.price = price;
+    }
+
     public Song(int id, String nameSong, String singerName, String linkSong, String linkImg, double price) {
         this.id = id;
         this.nameSong = nameSong;

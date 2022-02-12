@@ -18,6 +18,7 @@ public class ControlServlet extends HttpServlet {
     SingerDAO singerDAO = new SingerDAO();
     UserDAO userDAO = new UserDAO();
     BillDAO billDAO = new BillDAO();
+    SongDAO songDAO = new SongDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,8 +48,8 @@ public class ControlServlet extends HttpServlet {
             case "updateInfo":
                 updateInfo(request, response);
                 break;
-            case "delete":
-                delete(request, response);
+            case "deleteSinger":
+                deleteSinger(request, response);
                 break;
             case "getProfileSinger":
                 getProfileSinger(request, response);
@@ -62,15 +63,31 @@ public class ControlServlet extends HttpServlet {
         }
     }
 
-    private void getProfileSinger(HttpServletRequest request, HttpServletResponse response) {
-
+    private void getProfileSinger(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("idSinger"));
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        Singer singer = singerDAO.getSinger(id);
+        String nameSinger = singer.getNameSinger();
+        String phoneNumber = singer.getPhoneNumber();
+        String email = singer.getEmail();
+        String address = singer.getAddress();
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/profile.jsp");
+        request.setAttribute("id",id);
+        request.setAttribute("userName",userName);
+        request.setAttribute("password",password);
+        request.setAttribute("nameSinger",nameSinger);
+        request.setAttribute("phoneNumber",phoneNumber);
+        request.setAttribute("email",email);
+        request.setAttribute("address",address);
+        requestDispatcher.forward(request,response);
     }
 
     private void getInfoAccount(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void deleteSinger(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int totalSinger = accountDAO.getTotalSinger();
         int totalUser = accountDAO.getTotalUser();
         int idAdmin = Integer.parseInt(request.getParameter("idAdmin"));
@@ -113,9 +130,19 @@ public class ControlServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         } else if (idRole == 2) {
             Singer singer = singerDAO.getSinger(idLogin);
+            ArrayList<SongByDownload> songByDownloads = songDAO.getSongsDetailBySingerId(idLogin);
+            ArrayList<Song> songs = songDAO.getSongBySingerId(idLogin);
+            int totalSong = songs.size();
+            int totalRevenue = 0;
+            for (SongByDownload song: songByDownloads) {
+                totalRevenue += song.getSong().getPrice() * song.getNumberOfDownload();
+            }
             request.setAttribute("singer", singer);
+            request.setAttribute("totalSong", totalSong);
+            request.setAttribute("totalRevenue", totalRevenue);
             request.setAttribute("userName", userName);
             request.setAttribute("password", password);
+            request.setAttribute("songByDownloads", songByDownloads);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/dashboard.jsp");
             requestDispatcher.forward(request, response);
         } else if (idRole == 3) {

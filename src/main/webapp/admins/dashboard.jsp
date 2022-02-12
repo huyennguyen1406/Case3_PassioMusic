@@ -182,7 +182,7 @@
                                         <td class="txt-oflo">${singer.getSinger().getEmail()}</td>
                                         <td class="txt-oflo">${singer.getRevenue()}</td>
                                         <td class="txt-oflo"><a
-                                                href="/home?action=delete&idAdmin=${admin.getId()}&idSinger=${singer.getSinger().getId()}">DELETE</a></td>
+                                                href="/home?action=deleteSinger&idAdmin=${admin.getId()}&idSinger=${singer.getSinger().getId()}">DELETE</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

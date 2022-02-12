@@ -15,7 +15,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/singers/plugins/images/favicon.png">
 
     <link href="/singers/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/singers/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <link rel="stylesheet"
+          href="/singers/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
 
     <link href="/singers/css/style.min.css" rel="stylesheet">
 </head>
@@ -35,17 +36,13 @@
             <div class="navbar-header" data-logobg="skin6">
 
                 <a class="navbar-brand" href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}">
-
                     <b class="logo-icon">
-
                         <img src="/singers/plugins/images/logo-icon.png" alt="homepage"/>
                     </b>
-
                     <span class="logo-text">
                             <img src="/singers/plugins/images/logo-text.png" alt="homepage"/>
                         </span>
                 </a>
-
                 <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
                    href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
             </div>
@@ -55,7 +52,7 @@
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
 
                     <li>
-                        <a class="profile-pic" href="/home">
+                        <a class="profile-pic" href="/home?action=getProfileSinger&idSinger=${singer.getId()}&userName=${userName}&password=${password}">
                             <img src="/singers/plugins/images/users/varun.jpg" alt="user-img" width="36"
                                  class="img-circle"><span
                                 class="text-white font-medium">${singer.getNameSinger()}</span></a>
@@ -74,26 +71,28 @@
                 <ul id="sidebarnav">
 
                     <li class="sidebar-item pt-2">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}"
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                           href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}"
                            aria-expanded="false">
                             <i class="far fa-clock" aria-hidden="true"></i>
                             <span class="hide-menu">Analyst</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=getProfileSinger&idSinger=${singer.getId()}";
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                           href="/home?action=getProfileSinger&idSinger=${singer.getId()}&userName=${userName}&password=${password}" ;
                            aria-expanded="false">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span class="hide-menu">Profile</span>
                         </a>
                     </li>
-<%--                    <li class="sidebar-item">--%>
-<%--                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=getProfileSinger&idSinger=${singer.getId()}"--%>
-<%--                           aria-expanded="false">--%>
-<%--                            <i class="fa fa-table" aria-hidden="true"></i>--%>
-<%--                            <span class="hide-menu">Basic Table</span>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
+                    <%--                    <li class="sidebar-item">--%>
+                    <%--                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=getProfileSinger&idSinger=${singer.getId()}"--%>
+                    <%--                           aria-expanded="false">--%>
+                    <%--                            <i class="fa fa-table" aria-hidden="true"></i>--%>
+                    <%--                            <span class="hide-menu">Basic Table</span>--%>
+                    <%--                        </a>--%>
+                    <%--                    </li>--%>
                 </ul>
 
             </nav>
@@ -111,9 +110,9 @@
         </div>
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-6 col-md-12">
                     <div class="white-box analytics-info">
-                        <h3 class="box-title">Total Singers</h3>
+                        <h3 class="box-title">Total Song</h3>
                         <ul class="list-inline two-part d-flex align-items-center mb-0">
                             <li>
                                 <div id="sparklinedash">
@@ -121,25 +120,25 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                 </div>
                             </li>
-                            <li class="ms-auto"><span class="counter text-success">${totalSinger}</span></li>
+                            <li class="ms-auto"><span class="counter text-success">${totalSong}</span></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="white-box analytics-info">
-                        <h3 class="box-title">Total Users</h3>
-                        <ul class="list-inline two-part d-flex align-items-center mb-0">
-                            <li>
-                                <div id="sparklinedash2">
-                                    <canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                </div>
-                            </li>
-                            <li class="ms-auto"><span class="counter text-purple">${totalUser}</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
+<%--                <div class="col-lg-4 col-md-12">--%>
+<%--                    <div class="white-box analytics-info">--%>
+<%--                        <h3 class="box-title">Total Users</h3>--%>
+<%--                        <ul class="list-inline two-part d-flex align-items-center mb-0">--%>
+<%--                            <li>--%>
+<%--                                <div id="sparklinedash2">--%>
+<%--                                    <canvas width="67" height="30"--%>
+<%--                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>--%>
+<%--                                </div>--%>
+<%--                            </li>--%>
+<%--                            <li class="ms-auto"><span class="counter text-purple">${totalUser}</span></li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+                <div class="col-lg-6 col-md-12">
                     <div class="white-box analytics-info">
                         <h3 class="box-title">Total Revenue</h3>
                         <ul class="list-inline two-part d-flex align-items-center mb-0">
@@ -149,7 +148,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                 </div>
                             </li>
-                            <li class="ms-auto"><span class="counter text-info">${revenue}</span>
+                            <li class="ms-auto"><span class="counter text-info">${totalRevenue}</span>
                             </li>
                         </ul>
                     </div>
@@ -159,68 +158,37 @@
                 <div class="col-md-12 col-lg-12 col-sm-12">
                     <div class="white-box">
                         <div class="d-md-flex mb-3">
-                            <h3 class="box-title mb-0">Singer List</h3>
+                            <h3 class="box-title mb-0">Song List</h3>
                         </div>
                         <div class="table-responsive">
                             <table class="table no-wrap">
                                 <thead>
                                 <tr>
                                     <th class="border-top-0">No</th>
-                                    <th class="border-top-0">Singer Name</th>
-                                    <th class="border-top-0">Phone Number</th>
-                                    <th class="border-top-0">Email</th>
+                                    <th class="border-top-0">Song Name</th>
+                                    <th class="border-top-0">Download</th>
+                                    <th class="border-top-0">Price</th>
                                     <th class="border-top-0">Revenue</th>
                                     <th class="border-top-0">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${singerByRevenue}" var="singer">
+                                <c:forEach items="${songByDownloads}" var="song">
                                     <tr>
-                                        <td class="txt-oflo"></td>
-                                        <td class="txt-oflo">${singer.getSinger().getNameSinger()}</td>
-                                        <td class="txt-oflo">${singer.getSinger().getPhoneNumber()}</td>
-                                        <td class="txt-oflo">${singer.getSinger().getEmail()}</td>
-                                        <td class="txt-oflo">${singer.getRevenue()}</td>
+                                        <td class="txt-oflo">${song.getSong().getId()}</td>
+                                        <td class="txt-oflo">${song.getSong().getNameSong()}</td>
+                                        <td class="txt-oflo">${song.getNumberOfDownload()}</td>
+                                        <td class="txt-oflo">${song.getSong().getPrice()}</td>
+                                        <td class="txt-oflo">${song.getSong().getPrice()*song.getNumberOfDownload()}</td>
                                         <td class="txt-oflo"><a
-                                                href="/home?action=delete&idAdmin=${admin.getId()}&idSinger=${singer.getSinger().getId()}">DELETE</a></td>
+                                                href="">DELETE</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-sm-12">
-                    <div class="white-box">
-                        <div class="d-md-flex mb-3">
-                            <h3 class="box-title mb-0">User List</h3>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table no-wrap">
-                                <thead>
                                 <tr>
-                                    <th class="border-top-0">No</th>
-                                    <th class="border-top-0">User Name</th>
-                                    <th class="border-top-0">Phone Number</th>
-                                    <th class="border-top-0">Email</th>
-                                    <th class="border-top-0">Address</th>
-                                    <th class="border-top-0">Cash</th>
+                                    <td colspan="6"><a href="">Create New Song</a></td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${userByRevenue}" var="user">
-                                    <tr>
-                                        <td class="txt-oflo"></td>
-                                        <td class="txt-oflo">${user.getUser().getNameUser()}</td>
-                                        <td class="txt-oflo">${user.getUser().getPhoneNumber()}</td>
-                                        <td class="txt-oflo">${user.getUser().getEmail()}</td>
-                                        <td class="txt-oflo">${user.getUser().getAddress()}</td>
-                                        <td class="txt-oflo">${user.getRevenue()}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
                             </table>
                         </div>
                     </div>
