@@ -22,7 +22,7 @@ public class SongDAO {
     private static final String DELETE_SONG_BY_SONG_ID = "UPDATE tbl_song SET song_name = '', song_link = '', song_img = '', song_price = 0 WHERE id_song = ?;";
     private static final String ADD_NEW_SONG = "INSERT INTO tbl_song (song_name, id_sing, song_link, song_img, song_price) VALUES (?, ?, ?, ?, ?);";
     private static final String SONG_AND_SINGER_DETAIL = "SELECT id_song,song_name,song_link,song_img,song_price,sing_name FROM case_modules_3.tbl_song\n" +
-            "left join tbl_singer on tbl_singer.id_sing = tbl_song.id_sing;";
+            "left join tbl_singer on tbl_singer.id_sing = tbl_song.id_sing where song_price != 0;";
     private static final String GET_SONG_BY_ID = "SELECT id_song,song_name,song_link,song_img,song_price,sing_name FROM case_modules_3.tbl_song\n" +
             "inner join tbl_singer on tbl_song.id_sing = tbl_singer.id_sing where id_song = ?;";
     private static final String GET_SONG_OWN = "SELECT tbl_song.id_song,song_name,song_link,song_img,song_price,sing_name FROM case_modules_3.tbl_bill\n" +
@@ -58,7 +58,7 @@ public class SongDAO {
         Song song = null;
         try {
             Connection connection = myConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_SONG_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_SONG_BY_ID_SONG);
             preparedStatement.setInt(1, idSong);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){

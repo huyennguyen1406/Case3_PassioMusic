@@ -47,9 +47,6 @@ public class ControlServlet extends HttpServlet {
             case "registerPost":
                 registerPost(request, response);
                 break;
-            case "updateInfo":
-                updateInfo(request, response);
-                break;
             case "deleteSinger":
                 deleteSinger(request, response);
                 break;
@@ -506,10 +503,6 @@ public class ControlServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/update-information/update-information.jsp");
             requestDispatcher.forward(request, response);
         }
-    }
-
-    private void updateInfo(HttpServletRequest request, HttpServletResponse response) {
-
     }
 
     private void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
