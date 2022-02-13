@@ -4,9 +4,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    0
     <title>Passio's Corner - From Mood team with luv <3</title>
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="/users/img/core-img/favicon.ico">
     <link rel="stylesheet" href="/users/style.css">
 </head>
 
@@ -47,8 +46,8 @@
                         <div class="classynav">
                             <ul>
                                 <li><a href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}">Home</a></li>
-                                <li><a href="albums-store.jsp">Playlist</a></li>
-                                <li><a href="contact.jsp">Liên hệ</a></li>
+                                <li><a href="/home?action=getPlaylist&idUser=${id}&userName=${userName}&password=${password}">Playlist</a></li>
+                                <li><a href="/home?action=getContact&idUser=${id}&userName=${userName}&password=${password}">Liên hệ</a></li>
                             </ul>
 
                             <!-- Đổi sang tên người dùng, bấm vào để logout -->
@@ -115,7 +114,7 @@
             <div class="col-12">
                 <div class="section-heading style-2">
                     <!--                        <p>Typical song</p>-->
-                    <h2>Những bài bạn chưa có điều kiện để mua</h2>
+                    <h2>Mua rồi thì thỏa sức nghe thôi</h2>
                 </div>
             </div>
         </div>
@@ -131,82 +130,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="albums-slideshow owl-carousel">
-                    <!-- Single Album -->
-                    <div class="single-album">
-                        <img src="/users/img/bg-img/a1.jpg" alt="">
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>The Cure</h5>
-                            </a>
-                            <p>Second Song</p>
+                    <c:forEach items="${songBySingers}" var="songBySinger">
+                        <div class="single-album">
+                            <img src="${songBySinger.getSong().getLinkImg()}" alt="nothing to show">
+                            <div class="album-info">
+                                <a href="#">
+                                    <h5>${songBySinger.getSong().getNameSong()}</h5>
+                                </a>
+                                <p>${songBySinger.getNameSinger()}</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Single Album -->
-                    <div class="single-album">
-                        <img src="/users/img/bg-img/a2.jpg" alt="">
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>Sam Smith</h5>
-                            </a>
-                            <p>Underground</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Album -->
-                    <div class="single-album">
-                        <img src="/users/img/bg-img/a3.jpg" alt="">
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>Will I am</h5>
-                            </a>
-                            <p>First</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Album -->
-                    <div class="single-album">
-                        <img src="/users/img/bg-img/a4.jpg" alt="">
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>The Cure</h5>
-                            </a>
-                            <p>Second Song</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Album -->
-                    <div class="single-album">
-                        <img src="/users/img/bg-img/a5.jpg" alt="">
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>DJ SMITH</h5>
-                            </a>
-                            <p>The Album</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Album -->
-                    <div class="single-album">
-                        <img src="/users/img/bg-img/a6.jpg" alt="">
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>The Ustopable</h5>
-                            </a>
-                            <p>Unplugged</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Album -->
-                    <div class="single-album">
-                        <img src="/users/img/bg-img/a7.jpg" alt="">
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>Beyonce</h5>
-                            </a>
-                            <p>Songs</p>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
@@ -221,7 +155,7 @@
             <div class="col-12">
                 <div class="section-heading style-2">
                     <!--                        <p>See what’s new</p>-->
-                    <h2>Mua rồi thì thỏa sức nghe thôi</h2>
+                    <h2>Những bài bạn chưa có điều kiện để mua</h2>
                 </div>
             </div>
         </div>

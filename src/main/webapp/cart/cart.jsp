@@ -17,13 +17,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="main-heading">Shopping Cart</div>
+                <div class="main-heading">Song Cart</div>
                 <div class="table-cart">
                     <table>
                         <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
+                            <th>Song Name</th>
+                            <th>Price</th>
                             <th>Total</th>
                             <th></th>
                         </tr>
@@ -137,7 +137,89 @@
         </div>
     </div>
 </div>
+<div class="cart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-heading">Song Payment</div>
+                <div class="table-cart">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Song Name</th>
+                            <th>Price</th>
+                            <th>Play</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="display-flex align-center">
+                                    <div class="img-product">
+                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
+                                             alt="" class="mCS_img_loaded">
+                                    </div>
+                                    <div class="name-product">
+                                        Apple iPad Mini
+                                        <br>G2356
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="price">
+                                    $1,250.00
+                                </div>
+                            </td>
+                            <td>
+                                <div class="total">
+                                    $6,250.00
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" title="">
+                                    <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="display-flex align-center">
+                                    <div class="img-product">
+                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
+                                             alt="" class="mCS_img_loaded">
+                                    </div>
+                                    <div class="name-product">
+                                        Apple iPad Mini
+                                        <br>G2356
+                                    </div>
 
+                                </div>
+                            </td>
+                            <td>
+                                <div class="price">
+                                    $1,250.00
+                                </div>
+                            </td>
+                            <td>
+                                <div class="total">
+                                    $6,250.00
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" title="">
+                                    <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-cart -->
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

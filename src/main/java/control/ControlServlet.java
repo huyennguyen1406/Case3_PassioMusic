@@ -69,10 +69,44 @@ public class ControlServlet extends HttpServlet {
             case "getCart":
                 getCart(request, response);
                 break;
+            case "getPlaylist":
+                getPlaylist(request, response);
+                break;
+            case "getContact":
+                getContact(request, response);
+                break;
             default:
                 display(request, response);
                 break;
         }
+    }
+
+    private void getContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        User user = userDAO.getUser(idUser);
+
+        request.setAttribute("user", user);
+        request.setAttribute("id",idUser);
+        request.setAttribute("userName",userName);
+        request.setAttribute("password",password);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/contact.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void getPlaylist(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        User user = userDAO.getUser(idUser);
+
+        request.setAttribute("user", user);
+        request.setAttribute("id",idUser);
+        request.setAttribute("userName",userName);
+        request.setAttribute("password",password);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/albums-store.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void getCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -268,12 +302,14 @@ public class ControlServlet extends HttpServlet {
             requestDispatcher.forward(request, response);
         } else if (idRole == 3) {
             User user = userDAO.getUser(idLogin);
+            ArrayList<SongBySinger> songBySingers = songDAO.getSongAndSingerName();
 //            User user = userDAO.getUser(idLogin);
 //            user.getNameUser()
             request.setAttribute("user", user);
             request.setAttribute("id", idLogin);
             request.setAttribute("userName", userName);
             request.setAttribute("password", password);
+            request.setAttribute("songBySingers", songBySingers);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/index.jsp");
             requestDispatcher.forward(request, response);
         }

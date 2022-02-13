@@ -3,7 +3,7 @@ package model;
 public class Song {
     private int id;
     private String nameSong;
-    private String singerName;
+    private int singerId;
     private String linkSong;
     private String linkImg;
     private double price;
@@ -17,18 +17,26 @@ public class Song {
         this.price = price;
     }
 
-    public Song(int id, String nameSong, String singerName, String linkSong, String linkImg, double price) {
+    public Song(int id, String nameSong, String linkSong, String linkImg, double price) {
         this.id = id;
         this.nameSong = nameSong;
-        this.singerName = singerName;
         this.linkSong = linkSong;
         this.linkImg = linkImg;
         this.price = price;
     }
 
-    public Song(String nameSong, String singerName, String linkSong, String linkImg, double price) {
+    public Song(int id, String nameSong, int singerId, String linkSong, String linkImg, double price) {
+        this.id = id;
         this.nameSong = nameSong;
-        this.singerName = singerName;
+        this.singerId = singerId;
+        this.linkSong = linkSong;
+        this.linkImg = linkImg;
+        this.price = price;
+    }
+
+    public Song(String nameSong, int singerId, String linkSong, String linkImg, double price) {
+        this.nameSong = nameSong;
+        this.singerId = singerId;
         this.linkSong = linkSong;
         this.linkImg = linkImg;
         this.price = price;
@@ -50,12 +58,12 @@ public class Song {
         this.nameSong = nameSong;
     }
 
-    public String getSingerName() {
-        return singerName;
+    public int getSingerId() {
+        return singerId;
     }
 
-    public void setSingerName(String singerName) {
-        this.singerName = singerName;
+    public void setSingerId(int singerId) {
+        this.singerId = singerId;
     }
 
     public String getLinkSong() {

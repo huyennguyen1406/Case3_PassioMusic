@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>One Music - Modern Music HTML5 Template</title>
-    <link rel="icon" href="img/core-img/favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <title>Contact Us</title>
+    <link rel="icon" href="/users/img/core-img/favicon.ico">
+    <link rel="stylesheet" href="/users/style.css">
 
 </head>
 
@@ -27,7 +28,7 @@
 
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
-                        <a href="index.jsp" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                        <a href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
 
                         <div class="classy-navbar-toggler">
                             <span class="navbarToggler"><span></span><span></span><span></span></span>
@@ -41,21 +42,21 @@
 
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.jsp">Home</a></li>
-                                    <li><a href="albums-store.jsp">Albums</a></li>
-                                    <li><a href="contact.jsp">Liên hệ</a></li>
+                                    <li><a href="/home?action=checkLoginAndRole&userName=${userName}&password=${password}">Home</a></li>
+                                    <li><a href="/home?action=getPlaylist&idUser=${id}&userName=${userName}&password=${password}">Playlist</a></li>
+                                    <li><a href="/home?action=getContact&idUser=${id}&userName=${userName}&password=${password}">Liên hệ</a></li>
                                 </ul>
 
                                 <!-- Login/Register & Cart Button -->
                                 <div class="login-register-cart-button d-flex align-items-center">
                                     <!-- Login/Register -->
                                     <div class="login-register-btn mr-50">
-                                        <a href="login.html" id="loginBtn">Logout</a>
+                                        <a href="#" id="loginBtn">Hi ${user.getNameUser()}</a>
                                     </div>
 
                                     <!-- Cart Button -->
                                     <div class="cart-btn">
-                                        <p><span class="icon-shopping-cart"></span> <span class="quantity">1</span></p>
+                                        <a href="/home?action=getCart&idUser=${id}"><p><span class="icon-shopping-cart"></span> <span class="quantity">1</span></p></a>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +68,7 @@
         </div>
     </header>
 
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(/users/img/bg-img/breadcumb.jpg);">
         <div class="bradcumbContent">
             <h2>Liên hệ</h2>
         </div>
@@ -131,7 +132,6 @@
             </div>
         </div>
     </section>
-
     <footer class="footer-area">
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
@@ -143,16 +143,11 @@
             </div>
         </div>
     </footer>
-
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-
-    <script src="js/bootstrap/popper.min.js"></script>
-
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-
-    <script src="js/plugins/plugins.js"></script>
-
-    <script src="js/active.js"></script>
+    <script src="/users/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="/users/js/bootstrap/popper.min.js"></script>
+    <script src="/users/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/users/js/plugins/plugins.js"></script>
+    <script src="/users/js/active.js"></script>
 </body>
 
 </html>
