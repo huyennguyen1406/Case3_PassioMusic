@@ -36,6 +36,7 @@
                     </p>
                     <dl class="item-property">
                         <dt>Miêu tả</dt>
+
                         <dd><p>Viết gì mà chả được </p></dd>
                     </dl>
                     <dl class="param param-feature">

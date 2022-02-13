@@ -319,13 +319,29 @@ public class ControlServlet extends HttpServlet {
         } else if (idRole == 3) {
             User user = userDAO.getUser(idLogin);
             ArrayList<SongBySinger> songBySingers = songDAO.getSongAndSingerName();
+            ArrayList<SongBySinger> songOwns = songDAO.getSongOwn(idLogin);
+            ArrayList<SongBySinger> songNotOwns = new ArrayList<>();
+            for (SongBySinger song: songBySingers) {
+                boolean check = false;
+                for (SongBySinger songOwn: songOwns) {
+                    if(song.getSong().getId() == songOwn.getSong().getId()){
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check){
+                    songNotOwns.add(song);
+                }
+            }
 //            User user = userDAO.getUser(idLogin);
 //            user.getNameUser()
             request.setAttribute("user", user);
             request.setAttribute("id", idLogin);
             request.setAttribute("userName", userName);
             request.setAttribute("password", password);
-            request.setAttribute("songBySingers", songBySingers);
+
+            request.setAttribute("songOwns", songOwns);
+            request.setAttribute("songNotOwns", songNotOwns);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/index.jsp");
             requestDispatcher.forward(request, response);
         }

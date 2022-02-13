@@ -130,14 +130,14 @@
         <div class="row">
             <div class="col-12">
                 <div class="albums-slideshow owl-carousel">
-                    <c:forEach items="${songBySingers}" var="songBySinger">
+                    <c:forEach items="${songOwns}" var="songOwn">
                         <div class="single-album">
-                            <img src="${songBySinger.getSong().getLinkImg()}" alt="nothing to show">
+                            <img src="${songOwn.getSong().getLinkImg()}" alt="nothing to show">
                             <div class="album-info">
                                 <a href="#">
-                                    <h5>${songBySinger.getSong().getNameSong()}</h5>
+                                    <h5>${songOwn.getSong().getNameSong()}</h5>
                                 </a>
-                                <p>${songBySinger.getNameSinger()}</p>
+                                <p>${songOwn.getNameSinger()}</p>
                             </div>
                         </div>
                     </c:forEach>
@@ -160,14 +160,14 @@
         <div class="row">
 
             <!-- Single Album Area -->
-            <c:forEach items="${songBySingers}" var="songBySinger">
+            <c:forEach items="${songNotOwns}" var="songNotOwn">
                 <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                     <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
                         <div class="album-thumb">
-                            <img src="${songBySinger.getSong().getLinkImg()}" alt="nothing to show">
+                            <img src="${songNotOwn.getSong().getLinkImg()}" alt="nothing to show">
                             <!-- Album Price -->
                             <div class="album-price">
-                                <p>${songBySinger.getSong().getPrice()} $</p>
+                                <p>${songNotOwn.getSong().getPrice()} $</p>
                             </div>
                             <!-- Play Icon -->
 <%--                            <div class="play-icon">--%>
@@ -175,10 +175,10 @@
 <%--                            </div>--%>
                         </div>
                         <div class="album-info">
-                            <a href="/home?action=getSongDetail&idSong=${songBySinger.getSong().getId()}&userName=${userName}&password=${password}">
-                                <h5>${songBySinger.getSong().getNameSong()}</h5>
+                            <a href="/home?action=getSongDetail&idSong=${songNotOwn.getSong().getId()}&userName=${userName}&password=${password}">
+                                <h5>${songNotOwn.getSong().getNameSong()}</h5>
                             </a>
-                            <p>${songBySinger.getNameSinger()}</p>
+                            <p>${songNotOwn.getNameSinger()}</p>
                         </div>
                     </div>
                 </div>
