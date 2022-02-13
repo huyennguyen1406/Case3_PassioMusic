@@ -19,6 +19,7 @@ public class AccountDAO {
     private static final String SELECT_ID_ROLE_ACCOUNT = "select id_role from tbl_account where userName = ? and password = ?;";
     private static final String TOTAL_SINGER = "select count(id_acc) from tbl_account where id_role = 2;";
     private static final String TOTAL_USER = "select count(id_acc) from tbl_account where id_role = 3;";
+    private static final String DELETE_SINGER = "UPDATE tbl_account SET userName = '', password = '' WHERE (id_acc = ?);";
 
     public void addAccount(Account account) {
         try {
@@ -143,5 +144,16 @@ public class AccountDAO {
             e.printStackTrace();
         }
         return totalSinger;
+    }
+
+    public void deleteSingerById(int id){
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SINGER);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

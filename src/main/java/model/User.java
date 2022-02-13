@@ -9,6 +9,14 @@ public class User extends Account {
     public User() {
     }
 
+    public User(int id, String nameUser, String phoneNumber, String email, String address) {
+        super(id);
+        this.nameUser = nameUser;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
+
     public User(int id, String userName, String password, int idRole, String nameUser, String phoneNumber, String email, String address) {
         super(id, userName, password, idRole);
         this.nameUser = nameUser;

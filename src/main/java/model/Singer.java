@@ -16,6 +16,14 @@ public class Singer extends Account {
         this.address = address;
     }
 
+    public Singer(int id, String nameSinger, String phoneNumber, String email, String address) {
+        super(id);
+        this.nameSinger = nameSinger;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
+
     public Singer(String userName, String password, int idRole, String nameSinger, String phoneNumber, String email, String address) {
         super(userName, password, idRole);
         this.nameSinger = nameSinger;

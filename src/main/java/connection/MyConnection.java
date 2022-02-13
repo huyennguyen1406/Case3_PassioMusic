@@ -13,12 +13,14 @@ public class MyConnection {
     public Connection getConnection() {
         Connection myConnection = null;
         try {
-            // đổi class hiện tại về quản lý như 1 drive
-            Class.forName("com.mysql.jdbc.Driver");
-            //quản lý connection vs driver manager
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
             myConnection = DriverManager.getConnection(url, userName, passWord);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException  e) {
             System.err.println(e.getMessage());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return myConnection;
     }
