@@ -75,10 +75,26 @@ public class ControlServlet extends HttpServlet {
             case "getContact":
                 getContact(request, response);
                 break;
+            case "getSongDetail":
+                getSongDetail(request, response);
             default:
                 display(request, response);
                 break;
         }
+    }
+
+    private void getSongDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idSong = Integer.parseInt(request.getParameter("idSong"));
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        SongBySinger song = songDAO.getSongById(idSong);
+
+        request.setAttribute("userName",userName);
+        request.setAttribute("password",password);
+        request.setAttribute("song",song);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/details/detail.jsp");
+        requestDispatcher.forward(request, response);
+
     }
 
     private void getContact(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
