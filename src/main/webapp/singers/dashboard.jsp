@@ -19,6 +19,7 @@
           href="/singers/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
 
     <link href="/singers/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/singers/css/popup.css">
 </head>
 <body>
 <div class="preloader">
@@ -52,7 +53,8 @@
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
 
                     <li>
-                        <a class="profile-pic" href="/home?action=getProfileSinger&idSinger=${singer.getId()}&userName=${userName}&password=${password}">
+                        <a class="profile-pic"
+                           href="/home?action=getProfileSinger&idSinger=${singer.getId()}&userName=${userName}&password=${password}">
                             <img src="/singers/plugins/images/users/varun.jpg" alt="user-img" width="36"
                                  class="img-circle"><span
                                 class="text-white font-medium">${singer.getNameSinger()}</span></a>
@@ -80,19 +82,13 @@
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                           href="/home?action=getProfileSinger&idSinger=${singer.getId()}&userName=${userName}&password=${password}" ;
+                           href="/home?action=getProfileSinger&idSinger=${singer.getId()}&userName=${userName}&password=${password}"
+                           ;
                            aria-expanded="false">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span class="hide-menu">Profile</span>
                         </a>
                     </li>
-                    <%--                    <li class="sidebar-item">--%>
-                    <%--                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=getProfileSinger&idSinger=${singer.getId()}"--%>
-                    <%--                           aria-expanded="false">--%>
-                    <%--                            <i class="fa fa-table" aria-hidden="true"></i>--%>
-                    <%--                            <span class="hide-menu">Basic Table</span>--%>
-                    <%--                        </a>--%>
-                    <%--                    </li>--%>
                 </ul>
 
             </nav>
@@ -124,20 +120,6 @@
                         </ul>
                     </div>
                 </div>
-<%--                <div class="col-lg-4 col-md-12">--%>
-<%--                    <div class="white-box analytics-info">--%>
-<%--                        <h3 class="box-title">Total Users</h3>--%>
-<%--                        <ul class="list-inline two-part d-flex align-items-center mb-0">--%>
-<%--                            <li>--%>
-<%--                                <div id="sparklinedash2">--%>
-<%--                                    <canvas width="67" height="30"--%>
-<%--                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>--%>
-<%--                                </div>--%>
-<%--                            </li>--%>
-<%--                            <li class="ms-auto"><span class="counter text-purple">${totalUser}</span></li>--%>
-<%--                        </ul>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <div class="col-lg-6 col-md-12">
                     <div class="white-box analytics-info">
                         <h3 class="box-title">Total Revenue</h3>
@@ -174,26 +156,66 @@
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${songByDownloads}" var="song">
-                                    <tr>
-                                        <td class="txt-oflo">${song.getSong().getId()}</td>
-                                        <td class="txt-oflo">${song.getSong().getNameSong()}</td>
-                                        <td class="txt-oflo">${song.getNumberOfDownload()}</td>
-                                        <td class="txt-oflo">${song.getSong().getPrice()}</td>
-                                        <td class="txt-oflo">${song.getSong().getPrice()*song.getNumberOfDownload()}</td>
-                                        <td class="txt-oflo"><a
-                                                href="">DELETE</a>
-                                        </td>
-                                    </tr>
+                                    <c:if test="${song.getSong().getPrice()!=0}">
+                                        <tr>
+                                            <td class="txt-oflo">${song.getSong().getId()}</td>
+                                            <td class="txt-oflo">${song.getSong().getNameSong()}</td>
+                                            <td class="txt-oflo">${song.getNumberOfDownload()}</td>
+                                            <td class="txt-oflo">${song.getSong().getPrice()}</td>
+                                            <td class="txt-oflo">${song.getSong().getPrice()*song.getNumberOfDownload()}</td>
+                                            <td class="txt-oflo"><a
+                                                    href="/home?action=deleteSong&idSinger=${singer.getId()}&userName=${userName}&password=${password}&idSong=${song.getSong().getId()}">DELETE</a>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                                 </tbody>
-                                <tr>
-                                    <td colspan="6"><a href="">Create New Song</a></td>
-                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <p>
+                <button class="button" data-modal="modalOne">Create New Song</button>
+            </p>
+            <div id="modalOne" class="modal">
+                <div class="modal-content">
+                    <div class="contact-form">
+                        <a class="close">&times;</a>
+                        <form action="/home?action=createNewSong&idSinger=${singer.getId()}&userName=${userName}&password=${password}" method="post">
+                            <h2>Create New Song</h2>
+                            <div>
+                                <input type="text" name="song_name" placeholder="Song name"/>
+                                <input type="text" name="song_link" placeholder="Link to upload"/>
+                                <input type="text" name="song_img" placeholder="Link Song Image"/>
+                                <input type="text" name="price" placeholder="Price to deal"/>
+                            </div>
+                            <button type="submit" href="/">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script>
+                let modalBtns = [...document.querySelectorAll(".button")];
+                modalBtns.forEach(function (btn) {
+                    btn.onclick = function () {
+                        let modal = btn.getAttribute("data-modal");
+                        document.getElementById(modal).style.display = "block";
+                    };
+                });
+                let closeBtns = [...document.querySelectorAll(".close")];
+                closeBtns.forEach(function (btn) {
+                    btn.onclick = function () {
+                        let modal = btn.closest(".modal");
+                        modal.style.display = "none";
+                    };
+                });
+                window.onclick = function (event) {
+                    if (event.target.className === "modal") {
+                        event.target.style.display = "none";
+                    }
+                };
+            </script>
             <footer class="footer text-center"> Power by Mood Group with luv</footer>
 
         </div>

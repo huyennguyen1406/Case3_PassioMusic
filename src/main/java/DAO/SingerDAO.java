@@ -14,6 +14,7 @@ public class SingerDAO {
 
     private static final String INSERT_SINGER = "insert into tbl_singer (id_sing,sing_name,sing_phoneNumber,sing_email,sing_address) values (?, ?, ?, ?, ?);";
     private static final String SELECT_SINGER_BY_ID = "select * from tbl_singer where id_sing = ?;";
+    private static final String UPDATE_SINGER_INFORMATION = "UPDATE tbl_singer SET sing_name = ?, sing_phoneNumber = ?, sing_email = ?, sing_address = ? WHERE id_sing = ?;";
 
 
     public void addSinger(int id, String fullName, String phoneNumber, String email, String address) {
@@ -50,5 +51,20 @@ public class SingerDAO {
             e.printStackTrace();
         }
         return singer;
+    }
+
+    public void updateSingerInformation(String nameSinger, String phoneNumber, String email, String address, int idSinger){
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SINGER_INFORMATION);
+            preparedStatement.setString(1,nameSinger);
+            preparedStatement.setString(2,phoneNumber);
+            preparedStatement.setString(3,email);
+            preparedStatement.setString(4,address);
+            preparedStatement.setInt(5,idSinger);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

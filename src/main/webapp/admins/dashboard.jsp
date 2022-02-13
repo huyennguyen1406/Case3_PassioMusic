@@ -88,10 +88,10 @@
 <%--                        </a>--%>
 <%--                    </li>--%>
                     <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/homes?action=getInfoAccount&idAdmin=${admin.getId()}";
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/home?action=getInfoAccount&idAdmin=${admin.getId()}";
                            aria-expanded="false">
                             <i class="fa fa-table" aria-hidden="true"></i>
-                            <span class="hide-menu">Basic Table</span>
+                            <span class="hide-menu">Account Table</span>
                         </a>
                     </li>
                 </ul>

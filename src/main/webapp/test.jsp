@@ -11,10 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/home?action=getRoles" method="post">
-    <input type="text" name="user">
-    <input type="text" name="passWord">
-    <input type="submit" name="submit">
-</form>
+<h1>Test thread</h1>
 </body>
 </html>

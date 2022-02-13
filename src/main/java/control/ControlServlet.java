@@ -57,33 +57,144 @@ public class ControlServlet extends HttpServlet {
             case "getInfoAccount":
                 getInfoAccount(request, response);
                 break;
+            case "deleteSong":
+                deleteSong(request, response);
+                break;
+            case "createNewSong":
+                createNewSong(request, response);
+                break;
+            case "updateSingerInformation":
+                updateSingerInformation(request, response);
+                break;
             default:
                 display(request, response);
                 break;
         }
     }
 
-    private void getProfileSinger(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void updateSingerInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idSinger = Integer.parseInt(request.getParameter("idSinger"));
+        String nameSinger = request.getParameter("nameSinger");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        singerDAO.updateSingerInformation(nameSinger, phoneNumber, email, address, idSinger);
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+
+        Singer singer = singerDAO.getSinger(idSinger);
+        ArrayList<SongByDownload> songByDownloads = songDAO.getSongsDetailBySingerId(idSinger);
+        ArrayList<Song> songs = songDAO.getSongBySingerId(idSinger);
+        int totalSong = songs.size();
+        int totalRevenue = 0;
+        for (SongByDownload song : songByDownloads) {
+            totalRevenue += song.getSong().getPrice() * song.getNumberOfDownload();
+        }
+        request.setAttribute("singer", singer);
+        request.setAttribute("totalSong", totalSong);
+        request.setAttribute("totalRevenue", totalRevenue);
+        request.setAttribute("userName", userName);
+        request.setAttribute("password", password);
+        request.setAttribute("songByDownloads", songByDownloads);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/dashboard.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void deleteSong(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idSinger"));
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+        int idSong = Integer.parseInt(request.getParameter("idSong"));
+        songDAO.deleteSongBySongId(idSong);
+
         Singer singer = singerDAO.getSinger(id);
+        ArrayList<SongByDownload> songByDownloads = songDAO.getSongsDetailBySingerId(id);
+        ArrayList<Song> songs = songDAO.getSongBySingerId(id);
+        int totalSong = songs.size();
+        int totalRevenue = 0;
+        for (SongByDownload song : songByDownloads) {
+            totalRevenue += song.getSong().getPrice() * song.getNumberOfDownload();
+        }
+        request.setAttribute("singer", singer);
+        request.setAttribute("totalSong", totalSong);
+        request.setAttribute("totalRevenue", totalRevenue);
+        request.setAttribute("userName", userName);
+        request.setAttribute("password", password);
+        request.setAttribute("songByDownloads", songByDownloads);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/dashboard.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void createNewSong(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idSinger = Integer.parseInt(request.getParameter("idSinger"));
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        String song_name = request.getParameter("song_name");
+        String song_link = request.getParameter("song_link");
+        String song_img = request.getParameter("song_img");
+        double price = Double.parseDouble(request.getParameter("price"));
+        songDAO.addNewSong(song_name, idSinger, song_link, song_img, price);
+
+        Singer singer = singerDAO.getSinger(idSinger);
+        ArrayList<SongByDownload> songByDownloads = songDAO.getSongsDetailBySingerId(idSinger);
+        ArrayList<Song> songs = songDAO.getSongBySingerId(idSinger);
+        int totalSong = songs.size();
+        int totalRevenue = 0;
+        for (SongByDownload song : songByDownloads) {
+            totalRevenue += song.getSong().getPrice() * song.getNumberOfDownload();
+        }
+        request.setAttribute("singer", singer);
+        request.setAttribute("totalSong", totalSong);
+        request.setAttribute("totalRevenue", totalRevenue);
+        request.setAttribute("userName", userName);
+        request.setAttribute("password", password);
+        request.setAttribute("songByDownloads", songByDownloads);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/dashboard.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void getProfileSinger(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idSinger = Integer.parseInt(request.getParameter("idSinger"));
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        Singer singer = singerDAO.getSinger(idSinger);
         String nameSinger = singer.getNameSinger();
         String phoneNumber = singer.getPhoneNumber();
         String email = singer.getEmail();
         String address = singer.getAddress();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/profile.jsp");
-        request.setAttribute("id",id);
-        request.setAttribute("userName",userName);
-        request.setAttribute("password",password);
-        request.setAttribute("nameSinger",nameSinger);
-        request.setAttribute("phoneNumber",phoneNumber);
-        request.setAttribute("email",email);
-        request.setAttribute("address",address);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("id", idSinger);
+        request.setAttribute("userName", userName);
+        request.setAttribute("password", password);
+        request.setAttribute("nameSinger", nameSinger);
+        request.setAttribute("phoneNumber", phoneNumber);
+        request.setAttribute("email", email);
+        request.setAttribute("address", address);
+        requestDispatcher.forward(request, response);
     }
 
-    private void getInfoAccount(HttpServletRequest request, HttpServletResponse response) {
+    private void getInfoAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idAdmin = Integer.parseInt(request.getParameter("idAdmin"));
+        Admin admin = adminDAO.getAdminById(idAdmin);
+        ArrayList<Account> accounts = accountDAO.displayAllAccount();
+        ArrayList<AccountRoleName> accountRoleNames = new ArrayList<>();
+        for (Account account : accounts) {
+            String roleName;
+            if (account.getIdRole() == 1) {
+                roleName = "admin";
+            } else if (account.getIdRole() == 2) {
+                roleName = "singer";
+            } else if (account.getIdRole() == 3) {
+                roleName = "user";
+            } else {
+                roleName = "block";
+            }
+            accountRoleNames.add(new AccountRoleName(roleName, account));
+        }
+        request.setAttribute("admin", admin);
+        request.setAttribute("accountRoleNames", accountRoleNames);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/admins/account-table.jsp");
+        requestDispatcher.forward(request, response);
 
     }
 
@@ -134,7 +245,7 @@ public class ControlServlet extends HttpServlet {
             ArrayList<Song> songs = songDAO.getSongBySingerId(idLogin);
             int totalSong = songs.size();
             int totalRevenue = 0;
-            for (SongByDownload song: songByDownloads) {
+            for (SongByDownload song : songByDownloads) {
                 totalRevenue += song.getSong().getPrice() * song.getNumberOfDownload();
             }
             request.setAttribute("singer", singer);
