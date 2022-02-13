@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Song {
     private int id;
     private String nameSong;
@@ -8,7 +10,7 @@ public class Song {
     private String linkImg;
     private double price;
 
-    public Song() {
+    public Song(int idCart, ArrayList<Song> songs, int idUser) {
     }
 
     public Song(int id, String nameSong, double price) {

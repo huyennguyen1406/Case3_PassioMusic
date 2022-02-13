@@ -1,16 +1,14 @@
 package DAO;
 
 import connection.MyConnection;
-import model.Singer;
-import model.SingerByRevenue;
-import model.User;
-import model.UserByRevenue;
+import model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BillDAO {
     MyConnection myConnection = new MyConnection();
@@ -29,6 +27,42 @@ public class BillDAO {
             "join tbl_bill on tbl_cart.id_cart = tbl_bill.id_cart\n" +
             "right join tbl_user on tbl_user.id_user = tbl_cart.id_user\n" +
             "group by tbl_user.id_user;";
+    private final static String GET_BILL_BY_USER_ID = "select * from tbl_bill\n" +
+            "inner join tbl_cart on tbl_cart.id_cart = tbl_bill.id_cart\n" +
+            " where id_user = ?;";
+    private final static String ADD_BILL = "INSERT INTO tbl_bill (id_cart, created_at) VALUES (?, ?);";
+
+    public java.sql.Date addBill(int idCart, java.sql.Date dateCreate){
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(ADD_BILL);
+            preparedStatement.setInt(1,idCart);
+            preparedStatement.setDate(2, dateCreate);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<Bill> getBillListByUserId(int idUser){
+        ArrayList<Bill> bills = new ArrayList<>();
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_BILL_BY_USER_ID);
+            preparedStatement.setInt(1,idUser);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int idBill = resultSet.getInt(1);
+                int idCart = resultSet.getInt(2);
+                Date dateCreat = resultSet.getDate(3);
+                bills.add(new Bill(idBill,idCart,dateCreat));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bills;
+    }
 
     public double getTotalRevenue() {
         double totalRevenue = 0;

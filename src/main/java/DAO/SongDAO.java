@@ -18,6 +18,7 @@ public class SongDAO {
     private static final String GET_SONG_SPECIFIC_BY_SINGER_ID = "select tbl_song.id_song,id_sing,song_name,count(id_cart),song_price from tbl_song\n" +
             "left join tbl_cartdetail on tbl_song.id_song = tbl_cartdetail.id_song\n" +
             "group by id_song having id_sing = ?;";
+    private static final String GET_SONG_BY_ID_SONG = "select * from tbl_song where id_song = ?";
     private static final String DELETE_SONG_BY_SONG_ID = "UPDATE tbl_song SET song_name = '', song_link = '', song_img = '', song_price = 0 WHERE id_song = ?;";
     private static final String ADD_NEW_SONG = "INSERT INTO tbl_song (song_name, id_sing, song_link, song_img, song_price) VALUES (?, ?, ?, ?, ?);";
     private static final String SONG_AND_SINGER_DETAIL = "SELECT id_song,song_name,song_link,song_img,song_price,sing_name FROM case_modules_3.tbl_song\n" +
@@ -51,6 +52,27 @@ public class SongDAO {
             e.printStackTrace();
         }
         return songBySingers;
+    }
+
+    public Song getSongByIdSong (int idSong){
+        Song song = null;
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_SONG_BY_ID);
+            preparedStatement.setInt(1, idSong);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+//                int id = resultSet.getInt(1);
+                String songName = resultSet.getString(2);
+                String songLink = resultSet.getString(4);
+                String songImg = resultSet.getString(5);
+                double songPrice = resultSet.getDouble(6);
+                song = new Song(idSong,songName,songLink,songImg,songPrice);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return song;
     }
 
     public SongBySinger getSongById(int idSong) {

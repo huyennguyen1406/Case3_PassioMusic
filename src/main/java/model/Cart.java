@@ -1,21 +1,32 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Cart {
     private int id;
-    private Song song;
+    private ArrayList<Song> songs;
     private int idUser;
 
     public Cart() {
     }
 
-    public Cart(int id, Song song, int idUser) {
-        this.id = id;
-        this.song = song;
+    public Cart(int idUser) {
         this.idUser = idUser;
     }
 
-    public Cart(Song song, int idUser) {
-        this.song = song;
+    public Cart(int id, int idUser) {
+        this.id = id;
+        this.idUser = idUser;
+    }
+
+    public Cart(int id, ArrayList<Song> songs, int idUser) {
+        this.id = id;
+        this.songs = songs;
+        this.idUser = idUser;
+    }
+
+    public Cart(ArrayList<Song> songs, int idUser) {
+        this.songs = songs;
         this.idUser = idUser;
     }
 
@@ -27,12 +38,12 @@ public class Cart {
         this.id = id;
     }
 
-    public Song getSong() {
-        return song;
+    public ArrayList<Song> getSongs() {
+        return songs;
     }
 
-    public void setSong(Song song) {
-        this.song = song;
+    public void setSongs(ArrayList<Song> songs) {
+        this.songs = songs;
     }
 
     public int getIdUser() {

@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Cart Detail</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -22,72 +24,45 @@
                     <table>
                         <thead>
                         <tr>
-                            <th>Song Name</th>
+                            <th>Song Name ${idCart}</th>
                             <th>Price</th>
                             <th>Total</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="display-flex align-center">
-                                    <div class="img-product">
-                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
-                                             alt="" class="mCS_img_loaded">
+                        <c:forEach items="${cart.getSongs()}" var="song">
+                            <tr>
+                                <td>
+                                    <div class="display-flex align-center">
+                                        <div class="img-product">
+                                            <img src="${song.getLinkImg()}"
+                                                 alt="" class="mCS_img_loaded">
+                                        </div>
+                                        <div class="name-product">
+                                                ${song.getNameSong()}
+                                        </div>
                                     </div>
-                                    <div class="name-product">
-                                        Apple iPad Mini
-                                        <br>G2356
+                                </td>
+                                <td>
+                                    <div class="price">
+                                            ${song.getPrice()}
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price">
-                                    $1,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <div class="total">
-                                    $6,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <a href="#" title="">
-                                    <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="display-flex align-center">
-                                    <div class="img-product">
-                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
-                                             alt="" class="mCS_img_loaded">
+                                </td>
+                                <td>
+                                    <div class="total">
+                                            ${song.getPrice()}
                                     </div>
-                                    <div class="name-product">
-                                        Apple iPad Mini
-                                        <br>G2356
-                                    </div>
-
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price">
-                                    $1,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <div class="total">
-                                    $6,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <a href="#" title="">
-                                    <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
-                                </a>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <a href="/home?action=deleteSongFromCart&idSong=${song.getId()}&idCart=${idCart}&userName=${userName}&password=${password}"
+                                       title="">
+                                        <img src="https://www.seekpng.com/png/detail/202-2022743_edit-delete-icon-png-download-delete-icon-png.png"
+                                             style="width: 30px; height: 30px" alt="" class="mCS_img_loaded">
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <div class="coupon-box">
@@ -110,7 +85,7 @@
                             <tbody>
                             <tr>
                                 <td>Subtotal</td>
-                                <td class="subtotal">$2,589.00</td>
+                                <td class="subtotal">${total}</td>
                             </tr>
                             <tr>
                                 <td>Shipping</td>
@@ -118,12 +93,13 @@
                             </tr>
                             <tr class="total-row">
                                 <td>Total</td>
-                                <td class="price-total">$1,591.00</td>
+                                <td class="price-total">${total}</td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="btn-cart-totals">
-                            <a href="#" class="update round-black-btn" title="">Payment</a><br>
+                            <a href="/home?action=payMent&idCart=${idCart}&userName=${userName}&password=${password}"
+                               class="update round-black-btn" title="">Payment</a><br>
                             <a href="#" class="checkout round-black-btn" title="">Checkout</a>
                         </div>
 
@@ -148,70 +124,30 @@
                         <tr>
                             <th>Song Name</th>
                             <th>Price</th>
-                            <th>Play</th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="display-flex align-center">
-                                    <div class="img-product">
-                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
-                                             alt="" class="mCS_img_loaded">
+                        <c:forEach items="${songOwns}" var="songOwn">
+                            <tr>
+                                <td>
+                                    <div class="display-flex align-center">
+                                        <div class="img-product">
+                                            <img src="${songOwn.getSong().getLinkImg()}"
+                                                 alt="" class="mCS_img_loaded">
+                                        </div>
+                                        <div class="name-product">
+                                                ${songOwn.getSong().getNameSong()}
+                                            <br>${songOwn.getNameSinger()}
+                                        </div>
                                     </div>
-                                    <div class="name-product">
-                                        Apple iPad Mini
-                                        <br>G2356
+                                </td>
+                                <td>
+                                    <div class="price">
+                                            ${songOwn.getSong().getPrice()}
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price">
-                                    $1,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <div class="total">
-                                    $6,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <a href="#" title="">
-                                    <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="display-flex align-center">
-                                    <div class="img-product">
-                                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg"
-                                             alt="" class="mCS_img_loaded">
-                                    </div>
-                                    <div class="name-product">
-                                        Apple iPad Mini
-                                        <br>G2356
-                                    </div>
-
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price">
-                                    $1,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <div class="total">
-                                    $6,250.00
-                                </div>
-                            </td>
-                            <td>
-                                <a href="#" title="">
-                                    <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
-                                </a>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
