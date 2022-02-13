@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="/cart/cart.css">
 
 </head>
 <body>
@@ -40,17 +40,12 @@
                                         Apple iPad Mini
                                         <br>G2356
                                     </div>
-                                    <div class="price">
-                                        $1,250.00
-                                    </div>
                                 </div>
                             </td>
-                            <td class="product-count">
-                                <form action="#" class="count-inlineflex">
-                                    <div class="qtyminus">-</div>
-                                    <input type="text" name="quantity" value="1" class="qty">
-                                    <div class="qtyplus">+</div>
-                                </form>
+                            <td>
+                                <div class="price">
+                                    $1,250.00
+                                </div>
                             </td>
                             <td>
                                 <div class="total">
@@ -74,17 +69,13 @@
                                         Apple iPad Mini
                                         <br>G2356
                                     </div>
-                                    <div class="price">
-                                        $1,250.00
-                                    </div>
+
                                 </div>
                             </td>
-                            <td class="product-count">
-                                <form action="#" class="count-inlineflex">
-                                    <div class="qtyminus">-</div>
-                                    <input type="text" name="quantity" value="1" class="qty">
-                                    <div class="qtyplus">+</div>
-                                </form>
+                            <td>
+                                <div class="price">
+                                    $1,250.00
+                                </div>
                             </td>
                             <td>
                                 <div class="total">

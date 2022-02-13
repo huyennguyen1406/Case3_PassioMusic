@@ -29,19 +29,20 @@ public class UserDAO {
         }
     }
 
-    public User getUser(int id) {
+    public User getUser(int idUser) {
         User user = null;
         try {
             Connection connection = myConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, idUser);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                int id = resultSet.getInt(1);
                 String fullName = resultSet.getString(2);
                 String phoneNumber = resultSet.getString(3);
                 String email = resultSet.getString(4);
                 String address = resultSet.getString(5);
-                user = new User(fullName, phoneNumber, email, address);
+                user = new User(id, fullName, phoneNumber, email, address);
             }
         } catch (SQLException e) {
             e.printStackTrace();

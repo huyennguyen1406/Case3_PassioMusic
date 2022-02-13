@@ -66,10 +66,20 @@ public class ControlServlet extends HttpServlet {
             case "updateSingerInformation":
                 updateSingerInformation(request, response);
                 break;
+            case "getCart":
+                getCart(request, response);
+                break;
             default:
                 display(request, response);
                 break;
         }
+    }
+
+    private void getCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        response.sendRedirect("/cart/cart.jsp");
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cart/cart.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     private void updateSingerInformation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -257,11 +267,15 @@ public class ControlServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/singers/dashboard.jsp");
             requestDispatcher.forward(request, response);
         } else if (idRole == 3) {
-            response.sendRedirect("https://zingmp3.vn/");
+            User user = userDAO.getUser(idLogin);
 //            User user = userDAO.getUser(idLogin);
-//            request.setAttribute("user", user);
-//            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/home-users.jsp");
-//            requestDispatcher.forward(request, response);
+//            user.getNameUser()
+            request.setAttribute("user", user);
+            request.setAttribute("id", idLogin);
+            request.setAttribute("userName", userName);
+            request.setAttribute("password", password);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/users/index.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 
